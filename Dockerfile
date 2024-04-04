@@ -1,22 +1,17 @@
-from    alpine:latest
+FROM alpine:latest
 
-RUN apk add --no-cache bash
-RUN apk add gcc gmp isl25 libgfortran libquadmath mpc1 mpfr4 musl zlib libc-dev
-RUN apk add gfortran
-
-COPY . /app
+RUN apk add --no-cache bash gcc gmp isl25 libgfortran libquadmath mpc1 mpfr4 musl zlib libc-dev gfortran
 
 WORKDIR /app
 
-VOLUME ./compiled_projects
+COPY . .
 
-RUN find . -type f -exec ls -d {} + | grep .f90 | tr '\n' ' ' > files.txt
 
-RUN echo coucou
-RUN echo $(cat files.txt)
+RUN find srcs -type f -exec ls -d {} + | grep -E .f90 | tr '\n' ' ' > files.txt
 
-RUN gfortran -o compiled_project $(cat files.txt)
 
-RUN cp compiled_project ./compiled_projects
+RUN gfortran -o fortran_exec $(cat files.txt)
 
-CMD ["./compiled_project"]
+VOLUME /app/output
+
+CMD cp fortran_exec /app/output

@@ -8,6 +8,15 @@ COPY . /app
 
 WORKDIR /app
 
-RUN gfortran -o hello *.f90 */*.f90
+VOLUME ./compiled_projects
 
-CMD ["./hello"]
+RUN find . -type f -exec ls -d {} + | grep .f90 | tr '\n' ' ' > files.txt
+
+RUN echo coucou
+RUN echo $(cat files.txt)
+
+RUN gfortran -o compiled_project $(cat files.txt)
+
+RUN cp compiled_project ./compiled_projects
+
+CMD ["./compiled_project"]

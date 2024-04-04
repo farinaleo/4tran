@@ -9,7 +9,7 @@ run: # Run the Docker image 'Dockerfile'
 .PHONY: run
 
 clean: # Remove the Docker image 'Dockerfile'
-	docker rmi fortran_compiler
+	docker rmi -f fortran_compiler
 .PHONY: clean
 
 help:

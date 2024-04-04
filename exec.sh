@@ -16,6 +16,10 @@ else
   done < $requirements_files
 fi
 
+if [ -z "$files" ]; then
+  echo "---- No fortran files found ----"
+  exit 0
+fi
 gfortran -o fortran_exec $files
 ./fortran_exec
 cp fortran_exec /app/output

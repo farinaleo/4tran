@@ -1,13 +1,14 @@
-from    alpine:latest
+FROM alpine:latest
 
-RUN apk add --no-cache bash
-RUN apk add gcc gmp isl25 libgfortran libquadmath mpc1 mpfr4 musl zlib libc-dev
-RUN apk add gfortran
-
-COPY . /app
+RUN apk add --no-cache bash gcc gmp isl25 libgfortran libquadmath mpc1 mpfr4 musl zlib libc-dev gfortran
 
 WORKDIR /app
 
-RUN gfortran -o hello *.f90 */*.f90
+COPY . .
 
-CMD ["./hello"]
+RUN mkdir /output \
+    && gfortran -o /output/hello *.f90
+
+VOLUME /output
+
+CMD ["./output/hello"]

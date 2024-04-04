@@ -5,11 +5,11 @@ build: # Build the Docker image form the Dockerfile 'Dockerfile'
 .PHONY: build
 
 run: # Run the Docker image 'Dockerfile'
-	docker run -it fortran_compiler
+	docker run -it -v ./output:/test fortran_compiler
 .PHONY: run
 
 clean: # Remove the Docker image 'Dockerfile'
-	docker rmi fortran_compiler
+	docker rmi -f fortran_compiler
 .PHONY: clean
 
 help:

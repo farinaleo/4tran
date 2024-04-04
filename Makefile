@@ -9,6 +9,10 @@ run: # Run the Docker image 'Dockerfile'
 	@docker run --rm -v ./output:/app/output -v ./srcs:/app/srcs fortran_compiler "./exec.sh"
 .PHONY: run
 
+compile: # Run the Docker image 'Dockerfile'
+	docker run --rm -v ./output:/app/output -v ./srcs:/app/srcs fortran_compiler "./tools/compile.sh"
+.PHONY: compile
+
 clean: # Remove the Docker image 'Dockerfile'
 	docker rmi -f fortran_compiler
 .PHONY: clean

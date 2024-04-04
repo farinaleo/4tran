@@ -19,17 +19,11 @@ Welcome to the Docker 4tran Compiler project! This repository provides a Docker 
     ```
 3. **Add your code to the srcs folder**
 
-4. **Run the Docker container**: Once the image is downloaded, you can run a Docker container with the Fortran compiler using the following command:
+4. **Run the Docker container**: Once the image is created, you can run a Docker container with the Fortran compiler using the following command and it will output the code result:
 
     ```bash
     make run
     ```
-
-    Replace `/path/to/your/fortran/code` with the path to your Fortran code directory.
-
-5. **Compile your Fortran code**: Inside the Docker container, navigate to the `/code` directory and compile your Fortran code using the appropriate compiler commands.
-
-6. **Run your Fortran executable**: After compiling, you can run your Fortran executable directly from the Docker container.
 
 ## Documentation
 - Quickstart: https://fortran-lang.org/learn/quickstart/

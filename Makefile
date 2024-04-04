@@ -22,7 +22,7 @@ run: # Run the Docker image 'Dockerfile'
 copy: # Run the Docker image 'Dockerfile'
 	@echo -n "Enter directory path: "
 	@read DIRECTORY; \
-	echo $$DIRECTORY > ./.last_dir
+	echo $(PWD)'/'$$DIRECTORY > ./.last_dir
 .PHONY: run
 
 .PHONY: compile

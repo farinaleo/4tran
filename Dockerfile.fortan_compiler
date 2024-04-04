@@ -1,0 +1,12 @@
+from alpine:lastest
+
+RUN apk add --no-cache bash
+RUN apk add --no-cache gfortran
+
+COPY . /app
+
+WORKDIR /app
+
+RUN gfortran -o hello hello.f90
+
+CMD ["./hello"]

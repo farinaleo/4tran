@@ -4,14 +4,10 @@ RUN apk add --no-cache bash gcc gmp isl25 libgfortran libquadmath mpc1 mpfr4 mus
 
 WORKDIR /app
 
-COPY . .
-
-
-RUN find srcs -type f -exec ls -d {} + | grep -E .f90 | tr '\n' ' ' > files.txt
-
-
-RUN gfortran -o fortran_exec $(cat files.txt)
+VOLUME /app/srcs
 
 VOLUME /app/output
 
-CMD cp fortran_exec /app/output
+COPY exec.sh .
+
+RUN chmod 777 exec.sh

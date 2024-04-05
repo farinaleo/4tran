@@ -4,3 +4,4 @@ srcs
 log
 data
 .o
+.last_dir

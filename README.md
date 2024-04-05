@@ -17,15 +17,14 @@ Welcome to the Docker 4tran Compiler project! This repository provides a Docker 
     ```bash
     make
     ```
-3. **Add your code to the srcs folder**
 
-4. **Input your project path**: Once the image is created, you can change the default project location (./srcs by default) with:
+3. **Input your project path**: Once the image is created, you can change the default project location (./srcs by default) with:
 
    ```bash
     make copy
     ```
 
-5. **Run the Docker container**: Once the image is created, you can run a Docker container with the Fortran compiler using the following command and it will output the code result:
+4. **Run the Docker container**: Once the image is created, you can run a Docker container with the Fortran compiler using the following command and it will output the code result:
 
     ```bash
     make run

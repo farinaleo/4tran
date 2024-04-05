@@ -14,7 +14,7 @@ build: # Build the Docker image form the Dockerfile 'Dockerfile'
 .PHONY: build
 
 run: # Run the Docker image 'Dockerfile'
-	@docker run --rm -v ./output:/app/output -v $(DIRECTORY):/app/srcs fortran_compiler "./exec.sh"
+	@docker run -it --rm -v ./output:/app/output -v $(DIRECTORY):/app/srcs fortran_compiler "./exec.sh"
 .PHONY: run
 
 .PHONY: get_dir

@@ -18,8 +18,7 @@ run: # Run the Docker image 'Dockerfile'
 .PHONY: run
 
 copy: # Run the Docker image 'Dockerfile'
-	@echo -n "Enter directory path: "
-	bash select_item.sh
+	@bash select_item.sh
 	@echo "Directory path saved"
 	@cat ./.last_dir
 .PHONY: copy

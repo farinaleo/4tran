@@ -38,4 +38,4 @@ print_items() {
 }
 
 select_item_f item
-echo $PWD'/'$item  > ./.last_dir
+echo $PWD'/'$item x

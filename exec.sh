@@ -22,4 +22,6 @@ if [ -z "$files" ]; then
 fi
 gfortran -o fortran_exec $files
 ./fortran_exec
+cat
+#gnuplot -persist -e plot data.dat with lines
 cp fortran_exec /app/output

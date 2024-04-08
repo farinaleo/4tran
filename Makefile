@@ -8,12 +8,8 @@ else
 	DIRECTORY=$(shell cat .last_dir)
 endif
 
-ifeq (run,$(firstword $(MAKECMDGOALS)))
-  # use the rest as arguments for "run"
-  RUN_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
-  # ...and turn them into do-nothing targets
-  $(eval $(RUN_ARGS):;@:)
-endif
+Arguments := $(filter-out $@,$(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS)))
+
 
 
 build: # Build the Docker image form the Dockerfile 'Dockerfile'
@@ -22,7 +18,7 @@ build: # Build the Docker image form the Dockerfile 'Dockerfile'
 .PHONY: build
 
 run: # Run the Docker image 'Dockerfile'
-	@docker run -it --rm -e DISPLAY=$$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v ./output:/app/output -v $(DIRECTORY):/app/srcs fortran_compiler "./exec.sh" $(RUN_ARGS)
+	-@docker run -it --rm -e DISPLAY=$$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v ./output:/app/output -v $(DIRECTORY):/app/srcs fortran_compiler "./exec.sh" $(Arguments) 2>/dev/null || true
 .PHONY: run
 
 copy: # Run the Docker image 'Dockerfile'
@@ -41,3 +37,7 @@ help:
 	@echo "clean: Remove the docker image 'fortran_compiler'"
 	@echo "help: show this help message"
 .PHONY: help
+
+.SILENT:
+%::
+	@true

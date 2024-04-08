@@ -8,13 +8,21 @@ else
 	DIRECTORY=$(shell cat .last_dir)
 endif
 
+ifeq (run,$(firstword $(MAKECMDGOALS)))
+  # use the rest as arguments for "run"
+  RUN_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+  # ...and turn them into do-nothing targets
+  $(eval $(RUN_ARGS):;@:)
+endif
+
+
 build: # Build the Docker image form the Dockerfile 'Dockerfile'
 	docker build -t fortran_compiler .
 
 .PHONY: build
 
 run: # Run the Docker image 'Dockerfile'
-	@docker run -it --rm -e DISPLAY=$$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v ./output:/app/output -v $(DIRECTORY):/app/srcs fortran_compiler "./exec.sh"
+	@docker run -it --rm -e DISPLAY=$$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v ./output:/app/output -v $(DIRECTORY):/app/srcs fortran_compiler "./exec.sh" $(RUN_ARGS)
 .PHONY: run
 
 copy: # Run the Docker image 'Dockerfile'

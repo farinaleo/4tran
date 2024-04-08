@@ -4,6 +4,7 @@ files=`find ./srcs -type f -exec ls -d {} + | grep -E .f90 | tr '\n' ' '`
 requirements_files=`find ./srcs -type f -exec ls -d {} + | grep -E requirement.txt`
 
 # test if the requirements file exists
+
 if [ -z "$requirements_files" ]; then
   echo "---- No requirements file found ----"
 else
@@ -21,7 +22,7 @@ if [ -z "$files" ]; then
   exit 0
 fi
 gfortran -o fortran_exec $files
-./fortran_exec
+./fortran_exec $@
 cat
 #gnuplot -persist -e plot data.dat with lines
-cp fortran_exec /app/output
+cp fortran_exec

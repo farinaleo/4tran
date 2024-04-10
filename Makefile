@@ -21,6 +21,8 @@ run: # Run the Docker image 'Dockerfile'
 	-@docker run -it --rm -e DISPLAY=$$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v ./output:/app/output -v $(DIRECTORY):/app/srcs fortran_compiler "./exec.sh" $(Arguments) 2>/dev/null || true
 .PHONY: run
 
+enter_the_matrix:
+	-@docker run -it -e DISPLAY=$$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v ./output:/app/output -v $(DIRECTORY):/app/srcs fortran_compiler "bash"
 copy: # Run the Docker image 'Dockerfile'
 	@bash select_item.sh
 	@echo "Directory path saved"

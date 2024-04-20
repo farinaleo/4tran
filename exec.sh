@@ -60,9 +60,9 @@ else
     
     echo "$filename_no_ext"
   done
-  gfortran -ffree-line-length-none -c $m_files
+  gfortran -ffree-line-length-none -c -cpp $m_files
 fi
-gfortran -ffree-line-length-none -o fortran_exec $files
+gfortran -ffree-line-length-none -cpp -o  fortran_exec $files
 if [ -z "./fortran_exec" ]; then
  cecho "$RED" "---- Compilation failed ----"
 fi
